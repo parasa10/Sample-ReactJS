@@ -25,6 +25,8 @@ const DUMMY_EXPENSES = [
   },
 ];
 
+// This is app's entry point
+
 function App() {
   const [getExpenses, setExpenses] = useState(DUMMY_EXPENSES);
 

@@ -1,30 +1,29 @@
-import Card from "../UI/Card";
-import ExpenseItem from "./ExpenseItem";
-import "./Expenses.css";
+import { useState } from "react";
 
-function Expenses(prompt) {
+import Card from "../UI/Card";
+import ExpensesFilter from "./ExpensesFilter";
+
+import "./Expenses.css";
+import ExpensesList from "./ExpensesList";
+
+function Expenses(props) {
+  const [getFilterOption, setFilterOption] = useState(2021);
+
+  const optionChangeHandler = (selected) => {
+    setFilterOption(selected);
+  };
+
+  let filteredExpense = props.expenses.filter((expense) => {
+    return expense.date.getFullYear().toString() === getFilterOption.toString();
+  });
+
   return (
     <Card className="expenses">
-      <ExpenseItem
-        title={prompt.expenses[0].title}
-        amount={prompt.expenses[0].amount}
-        date={prompt.expenses[0].date}
+      <ExpensesFilter
+        onSelected={getFilterOption}
+        onChangeOption={optionChangeHandler}
       />
-      <ExpenseItem
-        title={prompt.expenses[1].title}
-        amount={prompt.expenses[1].amount}
-        date={prompt.expenses[1].date}
-      />
-      <ExpenseItem
-        title={prompt.expenses[2].title}
-        amount={prompt.expenses[2].amount}
-        date={prompt.expenses[2].date}
-      />
-      <ExpenseItem
-        title={prompt.expenses[3].title}
-        amount={prompt.expenses[3].amount}
-        date={prompt.expenses[3].date}
-      />
+      <ExpensesList item={filteredExpense} />
     </Card>
   );
 }

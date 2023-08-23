@@ -5,6 +5,7 @@ import ExpensesFilter from "./ExpensesFilter";
 
 import "./Expenses.css";
 import ExpensesList from "./ExpensesList";
+import ExpensesChart from "./ExpensesChart";
 
 function Expenses(props) {
   const [getFilterOption, setFilterOption] = useState(2021);
@@ -23,6 +24,7 @@ function Expenses(props) {
         onSelected={getFilterOption}
         onChangeOption={optionChangeHandler}
       />
+      <ExpensesChart expenses={filteredExpense} />
       <ExpensesList item={filteredExpense} />
     </Card>
   );

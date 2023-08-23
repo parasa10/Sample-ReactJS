@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import ExpenseForm from "./ExpenseForm";
 
 import "./NewExpense.css";
@@ -12,11 +14,28 @@ const NewExpense = (props) => {
     // console.log(newExpenses);
 
     props.onAddExpense(newExpenses);
+    setCancelled(false);
+  };
+
+  const [getCancelled, setCancelled] = useState(false);
+
+  const onNewExpense = () => {
+    setCancelled(true);
+  };
+
+  const onCancelHandler = () => {
+    setCancelled(false);
   };
 
   return (
     <div className="new-expense">
-      <ExpenseForm onSaveExpense={saveExpenseHandler} />
+      {!getCancelled && <button onClick={onNewExpense}>Add New Expense</button>}
+      {getCancelled && (
+        <ExpenseForm
+          onSaveExpense={saveExpenseHandler}
+          onCanceled={onCancelHandler}
+        />
+      )}
     </div>
   );
 };

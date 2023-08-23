@@ -42,7 +42,6 @@ function App() {
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses expenses={getExpenses} />
-      <div></div>
     </div>
   );
 }
